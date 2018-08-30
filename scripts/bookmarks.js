@@ -33,12 +33,28 @@ const Bookmarks = (function(){
   // (probably more helpful to show error within the form since 
   // you could be well  down the page when it happens, could also do an alert)
 
+
+  const showOrHideDescAndActions = function(){
+    $('#results').on('click', '.bookmark', e => {
+      e.preventDefault();
+      const desc = $(e.currentTarget).find('.bookmark_description');
+      const buttons = $(e.currentTarget).find('.button_wrapper');
+      desc.toggleClass('hidden');
+      buttons.toggleClass('hidden');
+    });
+  };
+
+  const attachHandlers = () => {
+    showOrHideDescAndActions();
+  };
+
+
   const render = function(){
 
   };
 
   return {
     render,
-
+    attachHandlers
   };
 }());
