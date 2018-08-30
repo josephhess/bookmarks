@@ -20,7 +20,7 @@
     <header><h1 class="center_text">Bookmark It!</h1></header>
     <section>
       <div class="well col-md-12">
-        <div class="rating_wrapper">
+        <div class="controls_wrapper">
           <form action="">
             <!-- <label for="minimum_rating">Minimum Rating</label> -->
             <select name="minimum_rating" id="minimum_rating" class="form_control">
@@ -43,16 +43,17 @@
     </section>
     <section>
         <div class="well col-md-12">
-          <div class="rating_wrapper">
+          <div class="form_wrapper">
               <form>
                   <div class="form-inline form-group">
                     <label for="bookMarkTitle">Title</label>
-                    <input type="text" class="form-control" id="bookMarkTitle" value="A great site" required>
+                    <input type="text" class="form-control" id="bookMarkTitle" value="">
                     <label for="bookMarkUrl">Url</label>
-                    <input type="text" id="bookMarkUrl" class="form-control" required>
+                    <input type="text" id="bookMarkUrl" class="form-control" value="">
                   </div>
                   <div class="form-group">
-                      <textarea class="form-control" rows="3" id="bookMarkDescriptionInput"></textarea>
+                      <label for="bookMarkDescriptionInput">Description</label>
+                      <textarea class="form-control" rows="2" id="bookMarkDescriptionInput"></textarea>
                     <!-- <p class="help-block">Example block-level help text here.</p> -->
                   </div>
                   <div class="ratingRadioOptions">
@@ -83,25 +84,11 @@
       <ul id="results">
         <li>
           <div class="well bookmark col-md-12">
-            <div class="bookmark_title">
-              <span>Learning to learn with Dr. Know</span>
-            </div>
-            <div class="bookmark_stars">
-                <span>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </span>
-              </div>
-          </div>
-
-          <div class="well bookmark col-md-12">
               <div class="bookmark_title">
                 <span>Learning to learn with Dr. Know</span>
               </div>
-              <div class="bookmark_description hidden">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus consequatur esse inventore deleniti sint alias animi voluptatem? At, numquam iure eos aspernatur, doloremque iste veniam perferendis, labore ut nulla optio.</p>
+              <div class="bookmark_description ">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
               </div>
               <div class="bookmark_stars">
                   <span>
@@ -110,10 +97,8 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                   </span>
-                  <div class="button_wrapper hidden">
-                      <button class="visit_link btn btn-alert">Visit Site
-                          <a href="www.google.com"></a>
-                      </button>
+                  <div class="button_wrapper ">
+                      <button class="visit_link btn btn-alert" value="">Visit Site</button>
                       <button class="edit_bookmark btn btn-alert">Edit</button>
                       <button class="delete_bookmark btn btn-alert">Delete</button>
                     </div>

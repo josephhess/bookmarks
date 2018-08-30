@@ -1,6 +1,10 @@
 /* global Api Store*/ 
 
 const Bookmarks = (function(){
+
+  const bookmarkToHtml = function(bookmarkObj){
+
+  };
   // get each bookmark into html
   // get all of the bookmark htmls into one big block
   // add the total html to the dom
@@ -44,8 +48,18 @@ const Bookmarks = (function(){
     });
   };
 
+  const visitSitePreventClose = function(){
+    $('.visit_link').on('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const link = $(e.target).val();
+      window.open(link, '_blank');
+    });
+  };
+
   const attachHandlers = () => {
     showOrHideDescAndActions();
+    visitSitePreventClose();
   };
 
 

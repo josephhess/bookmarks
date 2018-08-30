@@ -22,11 +22,8 @@ ul {
   float: right;
 }
 
-.rating_wrapper {
+.controls_wrapper {
   display: inline-block;
-  /* width: 200px; */
-  /* float: left;
-  clear: left; */
 }
 
 .hidden {
