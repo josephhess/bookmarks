@@ -1,12 +1,12 @@
 /* global $ Bookmarks Store Api*/ 
 
 $(function(){
-  Bookmarks.attachHandlers();
+ 
   Api.getBookmarks((response) => {
     Store.setBookMarks(response);
     Bookmarks.render();
   });
-
+  Bookmarks.attachHandlers();
 });
 
 

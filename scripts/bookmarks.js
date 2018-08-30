@@ -3,7 +3,77 @@
 const Bookmarks = (function(){
 
   const bookmarkToHtml = function(bookmarkObj){
+    const bookMarkRatingToStarString = function(rating){
+      let str = '';
+      for (let i = 1; i <= rating; i++){
+        str += '<i class="fas fa-star"></i>';
+      }
+      return str;
+    };
 
+    return `
+      <li>
+      <div class="well col-md-12">
+        <div class="form_wrapper">
+          <form class="bookmark_edit_form">
+                    <div class="form-inline form-group">
+                      <label for="bookMarkTitle">Title</label>
+                      <input type="text" class="form-control" id="bookMarkTitle" value="${bookmarkObj.title}">
+                      <label for="bookMarkUrl">Url</label>
+                      <input type="text" id="bookMarkUrl" class="form-control" value="${bookmarkObj.url}">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookMarkDescriptionInput">Description</label>
+                        <textarea class="form-control" rows="2" id="bookMarkDescriptionInput">${bookmarkObj.desc}</textarea>
+                    </div>
+                    <div class="ratingRadioOptions">
+                          <label for="inlineRadioOptions">Rate this link</label>
+                          <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
+                          </label>
+                          <label class="radio-inline">
+                              <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4">4
+                          </label>
+                          <label class="radio-inline">
+                              <input type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">5
+                          </label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default">Cancel</button>
+            </form>
+          </div>
+        </div>
+      <div class="well bookmark col-md-12">
+          <div class="bookmark_title">
+            <span>${bookmarkObj.title}</span>
+          </div>
+          <div class="bookmark_description hidden">
+            <p>${bookmarkObj.desc}</p>
+          </div>
+          <div class="bookmark_stars">
+              <span>
+                ${bookMarkRatingToStarString(bookmarkObj.rating)}
+              </span>
+              <div class="button_wrapper hidden">
+                  <button class="visit_link btn btn-alert" value="${bookmarkObj.url}">Visit Site</button>
+                  <button class="edit_bookmark btn btn-alert">Edit</button>
+                  <button class="delete_bookmark btn btn-alert">Delete</button>
+                </div>
+            </div>
+        </div>
+    </li>
+    `;
+  };
+
+  const generateHtmlString = function(){
+    const html = Store.bookmarks.map(elem => bookmarkToHtml(elem));
+    return html.join('');
   };
   // get each bookmark into html
   // get all of the bookmark htmls into one big block
@@ -49,10 +119,10 @@ const Bookmarks = (function(){
   };
 
   const visitSitePreventClose = function(){
-    $('.visit_link').on('click', e => {
+    $('#results').on('click', '.visit_link', e => {
       e.preventDefault();
       e.stopPropagation();
-      const link = $(e.target).val();
+      const link = $(e.currentTarget).val();
       window.open(link, '_blank');
     });
   };
@@ -62,9 +132,9 @@ const Bookmarks = (function(){
     visitSitePreventClose();
   };
 
-
   const render = function(){
-
+    const html = generateHtmlString();
+    $('#results').html(html);
   };
 
   return {
