@@ -1,0 +1,39 @@
+.center_text{
+  text-align: center;
+}
+li {
+  list-style-type: none;
+}
+
+.bookmark_title{
+  background-color: white;
+}
+
+.bookmark {
+  border: 1px black solid;
+}
+
+ul {
+  padding: 0px;
+}
+
+.button_wrapper {
+  display: inline-block;
+  float: right;
+}
+
+.rating_wrapper {
+  display: inline-block;
+  /* width: 200px; */
+  /* float: left;
+  clear: left; */
+}
+
+.hidden {
+  display: none;
+}
+
+.error_box {
+  color: red;
+  font-size: 20px;
+}
