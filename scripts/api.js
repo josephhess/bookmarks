@@ -12,6 +12,27 @@ const Api = (function(){
       method: 'POST',
       url: BASE_URL,
       contentType: 'application/json',
+      data: data,
+      success: successCallBack,
+      error: errorCallBack
+    });
+  };
+
+  const deleteBookMark = function(id, successCallBack, errorCallBack){  
+    $.ajax({
+      method: 'DELETE',
+      url: `${BASE_URL}/${id}`,
+      contentType: 'application/json',
+      success: successCallBack,
+      error: errorCallBack
+    });
+  };
+
+  const editBookMark = function(id, data, successCallBack, errorCallBack){  
+    $.ajax({
+      method: 'PATCH',
+      url: `${BASE_URL}/${id}`,
+      contentType: 'application/json',
       success: successCallBack,
       error: errorCallBack,
       data: data
@@ -20,17 +41,8 @@ const Api = (function(){
 
   return {
     getBookmarks,
-    createBookMark
+    createBookMark,
+    deleteBookMark
+
   };
 }());
-
-// function(){
-//   newBookMark = JSON.stringify({
-//     title: "a lame  title",
-//     url: 'https://www.google.com',
-//     desc: 'a longer description',
-//     rating: 2
-    
-//   });
-//   Api.createBookMark(newBookMark, (data) => {console.log(data)}, (e) => {console.log(e, 'error')} );
-// }

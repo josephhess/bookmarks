@@ -11,6 +11,7 @@ li {
 
 .bookmark {
   border: 1px black solid;
+  overflow: hidden;
 }
 
 ul {

@@ -22,9 +22,10 @@
       <div class="well col-md-12">
         <div class="controls_wrapper">
           <form action="">
-            <!-- <label for="minimum_rating">Minimum Rating</label> -->
+            <label for="minimum_rating"></label>
             <select name="minimum_rating" id="minimum_rating" class="form_control">
               <option value="" disable selected>Minimum Rating</option>
+              <option value="0">None</option>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
@@ -36,45 +37,45 @@
       <div class="button_wrapper ">
           <button id="show_bookmark_add_form">Add a new bookmark</button>
       </div>
-      <div class="button_wrapper error_box hidden">
+      <div class="button_wrapper error_box hidden" id="error_box">
         <p>title is required</p>
       </div>
     </div>
     </section>
     <section>
-      <div class="well col-md-12">
+      <div id="main_add_new_form_wrapper" class="well col-md-12">
         <div class="form_wrapper">
           <form id="add_new_form">
             <div class="form-inline form-group">
-              <label for="bookMarkTitle">Title</label>
-              <input type="text" class="form-control" id="bookMarkTitle" value="">
-              <label for="bookMarkUrl">Url</label>
-              <input type="text" id="bookMarkUrl" class="form-control" value="">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" name="title" id="newBookMarkTitle" value="">
+              <label for="url">Url</label>
+              <input type="text" id="bookMarkUrl" name="url" class="form-control" value="">
             </div>
             <div class="form-group">
-              <label for="bookMarkDescriptionInput">Description</label>
-              <textarea class="form-control" rows="2" id="bookMarkDescriptionInput"></textarea>
+              <label for="desc">Description</label>
+              <textarea class="form-control" rows="2" name="desc" id="newbookMarkDescriptionInput"></textarea>
             </div>
             <div class="ratingRadioOptions">
-              <label for="inlineRadioOptions">Rate this link</label>
+              <label for="rating">Rate this link</label>
               <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
+                <input type="radio" name="rating" id="inlineRadio1" value="1"> 1
               </label>
               <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+                <input type="radio" name="rating" id="inlineRadio2" value="2"> 2
               </label>
               <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
+                <input type="radio" name="rating" id="inlineRadio3" value="3"> 3
               </label>
               <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4">4
+                  <input type="radio" name="rating" id="inlineRadio4" value="4">4
               </label>
               <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">5
+                  <input type="radio" name="rating" id="inlineRadio5" value="5">5
               </label>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
-            <button type="button" class="btn btn-default">Cancel</button>
+            <button id="add_new_form_cancel" type="button" class="btn btn-default">Cancel</button>
           </form>
         </div>
       </div>
