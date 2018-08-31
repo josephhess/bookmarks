@@ -12,8 +12,11 @@ const Bookmarks = (function(){
       const formData = new FormData(this[0]);
       const o = {};
       formData.forEach((val, name) => {
-        o[name] = val;        
+        if(val){
+          o[name] = val; 
+        }        
       });
+      console.log(o);
       return JSON.stringify(o);
     }
   });
