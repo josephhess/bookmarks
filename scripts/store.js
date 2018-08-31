@@ -1,6 +1,7 @@
 const Store = (function(){
   let bookmarks;
   let minimum_rating = 0;
+  let currently_editing = null;
 
   const setBookMarks = function(dataSet){
     this.bookmarks = dataSet;
@@ -24,6 +25,7 @@ const Store = (function(){
     addBookMark,
     deleteBookMark,
     minimum_rating,
-    editBookMark
+    editBookMark,
+    currently_editing
   };
 }());

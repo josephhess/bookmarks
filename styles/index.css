@@ -35,3 +35,7 @@ ul {
   color: red;
   font-size: 20px;
 }
+
+#main_add_new_form_wrapper h3 {
+  text-align: center;
+}
