@@ -31,11 +31,18 @@ ul {
   display: none;
 }
 
-.error_box {
-  color: red;
+#error_box {
+  border: 2px rgb(148, 15, 15) solid;
+  text-align: center;
+  color: rgb(148, 15, 15);
   font-size: 20px;
 }
 
-#main_add_new_form_wrapper h3 {
+#add_new_bookmark {
   text-align: center;
+  font-size: 20px;
+}
+
+legend {
+  font-size: 15px;
 }

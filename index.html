@@ -17,13 +17,15 @@
 </head>
 <body>
   <div class="container">
-    <header><h1 class="center_text">Bookmark It!</h1></header>
+    <header role="banner"><h1 class="center_text">Bookmark It!</h1></header>
+    <main>
+    <div aria-live="assertive" role="alert" id="error_box" class=""><p id='error_message'></p></div>
     <section>
       <div class="well col-md-12">
         <div class="controls_wrapper">
           <form action="">
             <label for="minimum_rating"></label>
-            <select name="minimum_rating" id="minimum_rating" class="form_control">
+            <select aria-label="Select the minimum rating of bookmark to display"name="minimum_rating" id="minimum_rating" class="form_control">
               <option value="" disable selected>Minimum Rating</option>
               <option value="0">Show All</option>
               <option value="5">5</option>
@@ -37,9 +39,6 @@
       <div class="button_wrapper ">
           <button id="show_bookmark_add_form">Add a new bookmark</button>
       </div>
-      <div class="button_wrapper error_box hidden" id="error_box">
-        <p>title is required</p>
-      </div>
     </div>
     </section>
     <section id="add_new_container">
@@ -50,6 +49,7 @@
         
       </ul>
     </section>
+    </main>
   </div>
     
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

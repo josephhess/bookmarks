@@ -2,11 +2,18 @@
 
 const Bookmarks = (function(){
 
+  const errorCallback = function(response){
+    $('#error_box').removeClass('hidden');
+    $('#error_box').find('#error_message').html(response.responseJSON.message);
+  };
+
   $.fn.extend({
     serializeJson: function(){
       const formData = new FormData(this[0]);
       const o = {};
-      formData.forEach((val, name) => o[name] = val);
+      formData.forEach((val, name) => {
+        o[name] = val;        
+      });
       return JSON.stringify(o);
     }
   });
@@ -72,10 +79,6 @@ const Bookmarks = (function(){
     });
   };
 
-  const errorCallback = function(message){
-    alert(message.responseJSON.message);
-  };
-
   const handleHideOrShowNewBookMarkForm = function(){
     $('#show_bookmark_add_form').on('click', e => {
       e.preventDefault();
@@ -129,9 +132,9 @@ const Bookmarks = (function(){
       try {
         window.open(link, '_blank');
       } catch(e){
-        alert(e);
-      }
-      
+        $('#error_box').removeClass('hidden');
+        $('#error_box').find('#error_message').html(e.toString());
+      } 
     });
   };
 
@@ -147,6 +150,7 @@ const Bookmarks = (function(){
   };
 
   const render = function(){
+    $('#error_box').addClass('hidden');
     const addNewFormHtml = GenerateHtml.addNewForm();
     $('#add_new_container').html(addNewFormHtml)
     const html = GenerateHtml.generateHtmlString(Store.bookmarks);
