@@ -11,10 +11,10 @@ const Bookmarks = (function(){
       return str;
     };
     const radioChecked = function(radioVal, inputVal){
-      if (radioVal === inputVal){
+      if (radioVal === parseInt(inputVal)){
         return 'checked="checked"';
       };
-      return 'checked=""'
+      return ''
     };
 
     return `
@@ -23,31 +23,31 @@ const Bookmarks = (function(){
         <div class="form_wrapper ">
           <form class="bookmark_edit_form">
                     <div class="form-inline form-group">
-                      <label for="bookMarkTitle">Title</label>
-                      <input type="text" class="form-control" id="bookMarkTitle" value="${bookmarkObj.title}">
-                      <label for="bookMarkUrl">Url</label>
-                      <input type="text" id="bookMarkUrl" class="form-control" value="${bookmarkObj.url}">
+                      <label for="title">Title</label>
+                      <input type="text" class="form-control" name="title" value="${bookmarkObj.title}">
+                      <label for="url">Url</label>
+                      <input type="text" name="url" class="form-control" value="${bookmarkObj.url}">
                     </div>
                     <div class="form-group">
-                        <label for="bookMarkDescriptionInput">Description</label>
-                        <textarea class="form-control" rows="2" id="bookMarkDescriptionInput">${bookmarkObj.desc}</textarea>
+                        <label for="desc">Description</label>
+                        <textarea class="form-control" name="desc"rows="2" >${bookmarkObj.desc}</textarea>
                     </div>
                     <div class="ratingRadioOptions">
-                          <label for="inlineRadioOptions">Rate this link</label>
+                          <label for="rating">Rate this link</label>
                           <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" ${radioChecked(1,bookmarkObj.rating)}>1
+                            <input type="radio" name="rating" id="inlineRadio1" value="1" ${radioChecked(1,bookmarkObj.rating)}>1
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2" ${radioChecked(2,bookmarkObj.rating)}>2
+                            <input type="radio" name="rating" id="inlineRadio2" value="2" ${radioChecked(2,bookmarkObj.rating)}>2
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3" ${radioChecked(3,bookmarkObj.rating)}>3
+                            <input type="radio" name="rating" id="inlineRadio3" value="3" ${radioChecked(3,bookmarkObj.rating)}>3
                           </label>
                           <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4" ${radioChecked(4,bookmarkObj.rating)}>4
+                              <input type="radio" name="rating" id="inlineRadio4" value="4" ${radioChecked(4,bookmarkObj.rating)}>4
                           </label>
                           <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5" ${radioChecked(5,bookmarkObj.rating)}>5
+                              <input type="radio" name="rating" id="inlineRadio5" value="5" ${radioChecked(5,bookmarkObj.rating)}>5
                           </label>
                     </div>
                     <button type="submit" class="item_edit_submit btn btn-default">Submit</button>
@@ -87,15 +87,7 @@ const Bookmarks = (function(){
     const html = curData.map(elem => bookmarkToHtml(elem));
     return html.join('');
   };
-  // get each bookmark into html
-  // get all of the bookmark htmls into one big block
-  // add the total html to the dom
-  // listen for click on the element and expand it (certain element are hidden)
 
-  // listen for click on the delete button
-  // get id from the element
-  // call delete on api to delete the item
-  // rerender
 
   // if store is empty, show a message "Add your first bookmark!" 
   // and have add-new form shown, if store is not empty
@@ -104,10 +96,6 @@ const Bookmarks = (function(){
   // then listen for click on cancel to hide the form and show add a new
   // book mark button again, clear out contents of add new form on cancel
 
-  // listen for submit on add new form and add call addNewItem on api then
-  // if successful rerender
-  // otherwise show error on page
-  // 
 
   // listen for change on the minimum rating dropdown
   // get the value and pass it to a filter results function either
@@ -122,8 +110,7 @@ const Bookmarks = (function(){
   // on submit get id, post to api with updated info
   // if successful rerender
   // otherwise hide add new button and show error on the page
-  // (probably more helpful to show error within the form since 
-  // you could be well  down the page when it happens, could also do an alert)
+
   $.fn.extend({
     serializeJson: function(){
       const formData = new FormData(this[0]);
@@ -200,15 +187,37 @@ const Bookmarks = (function(){
   const handleNewBookmarkSubmit = function(){
     $('#add_new_form').submit(e => {
       e.preventDefault();
+
       const data = $(e.target).serializeJson();
       Api.createBookMark(
         data,
-        (e) => { 
-          Store.addBookMark(e);
+        (response_data) => { 
+          Store.addBookMark(response_data);
+          e.target.reset();
+          $('#main_add_new_form_wrapper').addClass('hidden');
           render();
         },
         errorCallback
       );
+    });
+  };
+
+  const handleEditBookMarksForm = function(){
+    $('#results').on('submit','.bookmark_edit_form', e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const id_form = $(e.currentTarget).closest('.bookmark_edit').attr('id');
+      const id = id_form.substr(0,(id_form.length - 5));
+      const data = $(e.target).serializeJson();
+
+      Api.editBookMark(id, data, 
+        () => {
+          Store.editBookMark(id,JSON.parse(data));
+          render();
+        },
+        errorCallback
+      );   
     });
   };
 
@@ -222,7 +231,7 @@ const Bookmarks = (function(){
     });
   };
 
-  const visitSitePreventClose = function(){
+  const visitSiteAndPreventClose = function(){
     $('#results').on('click', '.visit_link', e => {
       e.preventDefault();
       e.stopPropagation();
@@ -233,13 +242,14 @@ const Bookmarks = (function(){
 
   const attachHandlers = () => {
     showOrHideDescAndActions();
-    visitSitePreventClose();
+    visitSiteAndPreventClose();
     handleNewBookmarkSubmit();
     handleDeleteButtonClicked();
     handleFilterByRating();
     handleHideOrShowNewBookMarkForm();
     handleInitialFormState();
     hideOrShowBookMarkEditFrom();
+    handleEditBookMarksForm();
   };
 
   const render = function(){

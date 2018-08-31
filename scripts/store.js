@@ -14,15 +14,16 @@ const Store = (function(){
     this.bookmarks = this.bookmarks.filter( bm => bm.id !== id);
   };
 
-  // const editBookMark = function(id, obj){
-  //   const curBookMark = this.bookmarks.find( bm => bm.id = id);
-  //   Object.assign(curBookMark, obj);
-  // };
+  const editBookMark = function(id, obj){
+    const curBookMark = this.bookmarks.find( bm => bm.id === id);
+    Object.assign(curBookMark, obj);
+  };
   return {
     bookmarks,
     setBookMarks,
     addBookMark,
     deleteBookMark,
-    minimum_rating
+    minimum_rating,
+    editBookMark
   };
 }());

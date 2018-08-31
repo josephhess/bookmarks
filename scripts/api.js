@@ -42,7 +42,8 @@ const Api = (function(){
   return {
     getBookmarks,
     createBookMark,
-    deleteBookMark
+    deleteBookMark,
+    editBookMark
 
   };
 }());
