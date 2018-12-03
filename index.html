@@ -17,7 +17,7 @@
 </head>
 <body>
   <div class="container">
-    <header><h1 class="center_text">Bookmark It!</h1></header>
+    <header><h1 role="heading" alt="bookmark it" class="center_text">Bookmark It!</h1></header>
     <main>
     <div aria-live="assertive" role="alert" id="error_box" class=""><p id='error_message'></p></div>
     <section>
@@ -25,7 +25,7 @@
         <div class="controls_wrapper">
           <form action="">
             <label for="minimum_rating"></label>
-            <select aria-label="Select the minimum rating of bookmark to display"name="minimum_rating" id="minimum_rating" class="form_control">
+            <select aria-live="polite" aria-label="Select the minimum rating of bookmark to display"name="minimum_rating" id="minimum_rating" class="form_control">
               <option value="" disable selected>Minimum Rating</option>
               <option value="0">Show All</option>
               <option value="5">5</option>
@@ -44,7 +44,7 @@
     <section id="add_new_container">
 
     </section>
-    <section id="results_wrapper">
+    <section id="results_wrapper" aria-live="assertive">
       <ul id="results">
 
       </ul>
